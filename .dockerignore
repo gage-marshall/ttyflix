@@ -1,0 +1,30 @@
+# rendered output — bind-mounted at runtime
+output/
+subs/
+
+# source videos — bind-mounted at runtime
+videos/
+
+# user-edited files — bind-mounted at runtime
+config.toml
+www/
+
+# Windows-only bundled binaries (Docker uses system ffmpeg)
+ffmpeg.exe
+ffprobe.exe
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE / OS
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db
+
+# test / dev
+*.mp4
+*.mkv
+*.avi

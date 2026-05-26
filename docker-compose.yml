@@ -1,0 +1,16 @@
+services:
+  ttyflix:
+    build: .
+    ports:
+      - "23:23"        # telnet
+      - "2222:2222"    # SSH
+      - "8080:8080"    # HTTP landing page
+    volumes:
+      - ./config.toml:/app/config.toml:ro   # your settings
+      - ./www:/app/www:ro                   # landing page
+      - ./videos:/app/videos:ro             # source videos (read-only)
+      - ./output:/app/output                # rendered files (read-write)
+      # Persist SSH host key so clients don't get "host key changed" warnings
+      # after updates. Run `touch ssh_host_key` once before first `docker compose up`.
+      # - ./ssh_host_key:/app/ssh_host_key
+    restart: unless-stopped

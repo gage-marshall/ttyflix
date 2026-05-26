@@ -1,0 +1,39 @@
+# ── SSH host key (auto-generated, must stay private) ─────────────────────────
+ssh_host_key
+
+# ── User content (keep the directories, ignore their contents) ──────────────
+videos/*
+!videos/.gitkeep
+output/*
+!output/.gitkeep
+subs/*
+!subs/.gitkeep
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+.env
+
+# ── IDE / OS ─────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Claude / AI meta ─────────────────────────────────────────────────────────
+CLAUDE.md
+.claude/
+memory/

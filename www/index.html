@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{TITLE}}</title>
+
+  <style>
+    /* ── THEME ───────────────────────────────────────────────────────────
+       Change --accent to retheme the whole page, then update --glow to
+       match. Also update --border / --rule / --text / --bg2 to taste.
+
+       Common accent choices:
+         green    #39ff14   →  glow: 0 0 6px #39ff1488, 0 0 16px #39ff1433
+         amber    #ffb300   →  glow: 0 0 6px #ffb30088, 0 0 16px #ffb30033
+         cyan     #00e5ff   →  glow: 0 0 6px #00e5ff88, 0 0 16px #00e5ff33
+         magenta  #ff44ff   →  glow: 0 0 6px #ff44ff88, 0 0 16px #ff44ff33
+    ── */
+    :root {
+      --accent:  #39ff14;
+      --dim:     #555;
+      --bg:      #050505;
+      --bg2:     #080e08;
+      --border:  #0e2a0e;
+      --rule:    #1a3a1a;
+      --text:    #a0c0a0;
+      --warn:    #ffb300;
+      --glow:    0 0 6px #39ff1488, 0 0 16px #39ff1433;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--accent);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    /* scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px, transparent 2px,
+        rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* ── BANNER ── */
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .banner {
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-shadow: var(--glow);
+      font-weight: normal;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ── RULES ── */
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 1.5rem 0;
+    }
+
+    /* ── SECTIONS ── */
+    section { margin: 1.25rem 0; }
+
+    h2 {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--warn);
+      margin-bottom: 0.75rem;
+      font-weight: normal;
+    }
+    h2::before { content: '// '; color: var(--dim); }
+
+    p, li { color: var(--text); line-height: 1.7; }
+
+    ul { list-style: none; padding: 0; }
+    ul li::before { content: '  » '; color: var(--accent); }
+
+    /* ── CONNECT BOX ── */
+    .connect-box {
+      background: var(--bg2);
+      border: 1px solid var(--rule);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .dimtext { color: var(--dim); font-size: 0.8rem; display: block; margin-bottom: 0.4rem; }
+
+    /* the telnet command line */
+    .cmd {
+      display: block;
+      color: var(--accent);
+      text-shadow: var(--glow);
+      font-size: 1.1rem;
+      margin: 0.3rem 0;
+      letter-spacing: 0.04em;
+    }
+    .cmd::before { content: '$ '; color: var(--dim); }
+
+    /* ── KEY TABLE ── */
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .key-table th {
+      text-align: left;
+      color: var(--warn);
+      border-bottom: 1px solid var(--rule);
+      padding: 4px 12px 4px 0;
+      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: normal;
+    }
+    .key-table td {
+      padding: 4px 12px 4px 0;
+      color: var(--text);
+      vertical-align: top;
+    }
+    .key-table td:first-child {
+      color: var(--accent);
+      text-shadow: var(--glow);
+      white-space: nowrap;
+      min-width: 180px;
+    }
+
+    kbd {
+      background: #0a1a0a;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 1px 5px;
+      font-family: inherit;
+      font-size: 0.85em;
+      color: var(--accent);
+    }
+
+    /* ── MISC ── */
+    .warn { color: var(--warn); margin-top: 0.75rem; }
+
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { text-shadow: var(--glow); }
+
+    strong { color: var(--accent); font-weight: normal; text-shadow: var(--glow); }
+
+    footer {
+      text-align: center;
+      color: var(--dim);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1 class="banner">{{TITLE}}</h1>
+    <p class="subtitle">ANSI art streaming server</p>
+  </header>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Connect</h2>
+    <div class="connect-box">
+      <span class="dimtext">Open a terminal and run:</span>
+      <code class="cmd">{{TELNET_CMD}}</code>
+    </div>
+
+    <table class="key-table">
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><kbd>1</kbd> – <kbd>9</kbd> / <kbd>A</kbd> – <kbd>Z</kbd></td>
+          <td>Select content</td>
+        </tr>
+        <tr>
+          <td><kbd>Q</kbd></td>
+          <td>Return to menu / disconnect</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>About</h2>
+    <p>
+      Video streamed as ANSI art over Telnet, served frame-by-frame at the original framerate.
+      Open a terminal and connect to get started.
+    </p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Requirements</h2>
+    <ul>
+      <li>ANSI / VT100 escape sequence support</li>
+      <li>UTF-8 character encoding</li>
+      <li>Terminal size: at least <strong>{{COLS}} × {{ROWS}}</strong> columns / rows</li>
+    </ul>
+    <p class="warn">
+      ⚠ Windows users: use <a href="https://putty.org" target="_blank" rel="noopener">PuTTY</a>
+      or WSL — the built-in Windows Telnet client defaults to CP437 and will display garbage.
+    </p>
+  </section>
+
+  <hr class="rule">
+
+  <footer>{{TITLE}}</footer>
+
+</div>
+</body>
+</html>

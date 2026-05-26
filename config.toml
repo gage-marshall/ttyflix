@@ -1,0 +1,106 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  TTYFlix — Configuration
+#
+#  This is the only file you need to edit to set up your server.
+#
+#  After editing, run:
+#    python convert.py    — render your videos (do this first)
+#    python serve.py      — start the telnet + web server
+#
+#  With Docker:
+#    docker compose up    — builds and starts everything
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+# ── Server ──────────────────────────────────────────────────────────────────
+[server]
+
+# Title shown in the telnet menu banner. Keep it short — it must fit within
+# your terminal width minus 4 characters for the box border.
+title = "ANSI TELNET"
+
+# Address to bind to. "0.0.0.0" accepts connections from any network interface,
+# which is correct for a public server. Use "127.0.0.1" for localhost-only.
+host = "0.0.0.0"
+
+# Telnet port. 23 is standard but requires root on Linux/macOS.
+# Use a port above 1024 (e.g. 2323) if you are not running as root.
+port = 23
+
+# Port for the HTTP landing page. Edit www/index.html to customise the page.
+# Set to 0 to disable the web server entirely.
+web_port = 8080
+
+# Maximum number of simultaneous telnet connections. Additional connections
+# are rejected with a "server full" message.
+max_connections = 50
+
+# Seconds of keyboard inactivity before a client is disconnected. Applies
+# while waiting at the capability check, the menu, or between keystrokes.
+idle_timeout = 300
+
+# SSH port. SSH is recommended over Telnet — it is pre-installed on macOS,
+# Linux, and Windows 10/11, and requires no CP437 workarounds.
+#   ssh anything@your-server-hostname -p 2222
+# Set to 0 to disable the SSH server entirely.
+ssh_port = 2222
+
+# SSH host key path. Generated automatically on first run if it does not exist.
+# Keep this file private and out of version control.
+ssh_host_key = "ssh_host_key"
+
+
+# ── Terminal Layout ──────────────────────────────────────────────────────────
+[layout]
+
+# Terminal size your viewers need. All videos must be rendered at the same
+# dimensions as the server expects, so change these before converting.
+#
+# Standard:  80 × 25  (works in every terminal — good default)
+# HD:       160 × 50  (better detail — viewers need a large/zoomed-out terminal)
+cols = 80
+rows = 25
+
+
+# ── Video Conversion ─────────────────────────────────────────────────────────
+[convert]
+
+# Folder where you place your source video files.
+# Supported formats: .mkv .mp4 .avi .mov .m4v .webm .flv .wmv .ts .mpg .mpeg
+# The file name (without extension) becomes the menu title, so name files
+# descriptively: "Episode 01 - Intro.mkv" shows as "Episode 01 - Intro".
+input_dir = "videos"
+
+# Folder where rendered .ansi.gz files are stored.
+# The telnet server reads from this folder automatically — do not change it
+# here without also updating [server] if you need a custom path.
+output_dir = "output"
+
+# Set to true to re-render a file even if an .ansi.gz already exists.
+# Leave false for normal use (saves time on large collections).
+force = false
+
+# Preserve the source video's aspect ratio by adding letterbox/pillarbox bars.
+#   true  → black bars fill unused space, proportions stay correct (recommended)
+#   false → video is stretched to fill the terminal
+preserve_aspect = true
+
+# How often to write a complete "keyframe" (seconds). A lower value lets the
+# server recover from a bad packet faster but increases file size.
+keyframe_interval = 5.0
+
+
+# ── Subtitles ────────────────────────────────────────────────────────────────
+[subtitles]
+
+# Render embedded subtitles onto the bottom row of the video.
+# Requires the source file to contain a subtitle track.
+enabled = true
+
+# Preferred subtitle language (ISO 639-2 three-letter code, e.g. "eng" "jpn").
+# Leave blank to use the first subtitle track found in each file.
+language = ""
+
+# Folder where extracted subtitle files are cached between renders.
+# You can delete this folder safely; files will be re-extracted as needed.
+cache_dir = "subs"
