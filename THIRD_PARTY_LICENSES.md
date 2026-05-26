@@ -4,41 +4,6 @@ This project includes or depends on the following third-party software.
 
 ---
 
-## FFmpeg (Windows bundle: `ffmpeg.exe`, `ffprobe.exe`)
-
-**Version:** 2026-01-26-git-fe0813d6e2 (full build)
-**Provider:** Gyan Doshi — https://www.gyan.dev/ffmpeg/builds/
-**Project:** https://ffmpeg.org/
-
-**License: GNU General Public License v2 or later, with version 3 components
-(effective license: GPL v3)**
-
-The bundled `ffmpeg.exe` and `ffprobe.exe` are compiled with
-`--enable-gpl --enable-version3`, which enables GPL-licensed components
-including (but not limited to) libx264, libx265, libxvid, and frei0r.
-This makes the combined binary subject to the GNU General Public License
-version 3 or later.
-
-**Source code:** Gyan Doshi provides source packages alongside each build at
-https://www.gyan.dev/ffmpeg/builds/. The source corresponding to this build
-can be obtained from that page or by contacting the build maintainer.
-
-**This does NOT affect the TTYFlix server code**, which is independent
-software that invokes ffmpeg as an external process. If you replace the
-bundled binaries with your own ffmpeg build (e.g., an LGPL build or a
-system-installed package), that binary's own license terms apply instead.
-
-The full text of the GNU General Public License v3 is available at:
-https://www.gnu.org/licenses/gpl-3.0.txt
-
-A summary of your rights and obligations under the GPL:
-- You may use, study, share, and modify this software.
-- If you distribute this software (or any work that incorporates it),
-  you must make the source code available under the same GPL terms.
-- You must include a copy of the GPL license with any distribution.
-
----
-
 ## Pillow
 
 **Version:** ≥ 10.0.0
@@ -79,6 +44,27 @@ RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
 CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
+
+---
+
+## paramiko
+
+**Version:** ≥ 3.0.0
+**Project:** https://www.paramiko.org/
+**Source:** https://github.com/paramiko/paramiko
+
+**License: GNU Lesser General Public License v2.1 or later (LGPL-2.1+)**
+
+Copyright © 2003-2009 Robey Pointer
+Copyright © Jeff Forcier and contributors
+
+The full license text is available at:
+- https://github.com/paramiko/paramiko/blob/main/LICENSE
+- https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
+
+Paramiko is declared as a runtime dependency in `requirements.txt` and
+installed from PyPI by the end user. It is not modified or redistributed
+as part of this repository.
 
 ---
 
@@ -124,11 +110,3 @@ The official Docker image uses CPython.
 **License: Python Software Foundation License Version 2**
 https://docs.python.org/3/license.html
 
----
-
-## Notes on Docker deployment
-
-When building the Docker image, `ffmpeg` is installed from Debian's package
-repositories via `apt`. That package is separately licensed (GPL v2+) and is
-not bundled in this repository. The Dockerfile merely instructs the package
-manager to install it; no GPL binary is distributed as part of this source.

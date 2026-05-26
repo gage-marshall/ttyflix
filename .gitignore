@@ -41,3 +41,7 @@ desktop.ini
 CLAUDE.md
 .claude/
 memory/
+
+# Local ffmpeg
+ffprobe.exe
+ffmpeg.exe

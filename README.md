@@ -85,12 +85,12 @@ sequences and looks for printable ASCII keystrokes.
   ```
   # Ubuntu / Debian
   sudo apt install ffmpeg
-
+  
   # macOS (Homebrew)
   brew install ffmpeg
-
+  
   # Windows (winget)
-  winget install Gyan.FFmpeg
+  winget install ffmpeg
   ```
   Windows users without winget can grab a static build from
   [gyan.dev/ffmpeg/builds](https://www.gyan.dev/ffmpeg/builds/) — extract it and
