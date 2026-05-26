@@ -1,6 +1,6 @@
 # TTYFlix
 
-**Stream any video as ANSI art over Telnet.** Pre-render your videos into a
+**Stream any video as ANSI art over Telnet and SSH.** Pre-render your videos into a
 compact binary format, then serve them at the original framerate to anyone with
 a terminal — no browser, no plugins, no account required.
 
@@ -81,15 +81,20 @@ sequences and looks for printable ASCII keystrokes.
 ### 1. Prerequisites
 
 - **Python 3.11 or later** — [python.org/downloads](https://www.python.org/downloads/)
-- **ffmpeg** — Windows users: already included (`ffmpeg.exe`).
-  Linux/macOS users: install via your package manager:
+- **ffmpeg** — install via your package manager:
   ```
   # Ubuntu / Debian
   sudo apt install ffmpeg
-  
+
   # macOS (Homebrew)
   brew install ffmpeg
+
+  # Windows (winget)
+  winget install Gyan.FFmpeg
   ```
+  Windows users without winget can grab a static build from
+  [gyan.dev/ffmpeg/builds](https://www.gyan.dev/ffmpeg/builds/) — extract it and
+  make sure `ffmpeg` and `ffprobe` are on your `PATH`.
 - **Pillow** (Python image library):
   ```
   pip install -r requirements.txt

@@ -9,6 +9,10 @@ output/*
 subs/*
 !subs/.gitkeep
 
+# ── ffmpeg binaries (install via your package manager, do not commit) ────────
+ffmpeg.exe
+ffprobe.exe
+
 # ── Python ───────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
