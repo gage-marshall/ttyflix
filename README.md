@@ -1,6 +1,6 @@
 # TTYFlix
 
-**Stream any video as ANSI art over Telnet.** Pre-render your videos into a
+**Stream any video as ANSI art over Telnet and SSH.** Pre-render your videos into a
 compact binary format, then serve them at the original framerate to anyone with
 a terminal — no browser, no plugins, no account required.
 
