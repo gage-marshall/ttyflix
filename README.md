@@ -4,7 +4,7 @@
 compact binary format, then serve them at the original framerate to anyone with
 a terminal — no browser, no plugins, no account required.
 
-![TTYFlix demo](demo.gif)
+![TTYFlix demo](demo.webp)
 
 **Try it now** — open a terminal and run:
 
